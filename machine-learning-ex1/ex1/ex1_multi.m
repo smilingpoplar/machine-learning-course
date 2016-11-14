@@ -83,7 +83,7 @@ fprintf('Running gradient descent ...\n');
 
 % Choose some alpha value
 alpha = 0.3;
-num_iters = 50;
+num_iters = 400;
 
 % Init Theta and Run Gradient Descent 
 theta = zeros(3, 1);
@@ -104,7 +104,8 @@ fprintf('\n');
 % ====================== YOUR CODE HERE ======================
 % Recall that the first column of X is all-ones. Thus, it does
 % not need to be normalized.
-price = [1 1650 3] * theta;
+x = ([1650 3] - mu) ./ sigma;
+price = [1 x] * theta;
 
 % ============================================================
 
