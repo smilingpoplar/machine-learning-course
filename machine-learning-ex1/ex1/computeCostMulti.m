@@ -13,8 +13,8 @@ J = 0;
 % Instructions: Compute the cost of a particular choice of theta
 %               You should set J to the cost.
 
-
-
+devi = X * theta - y;  % h(x) = X * theta
+J = devi' * devi / (2 * m);
 
 
 % =========================================================================
