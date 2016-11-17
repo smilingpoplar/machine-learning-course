@@ -21,12 +21,15 @@ p = zeros(size(X, 1), 1);
 %       can use max(A, [], 2) to obtain the max for each row.
 %
 
+% Theta1: #neuron-2nd x (#neuron-1st + 1)
+% Theta2: #neuron-3rd x (#neuron-2nd + 1)
+X = [ones(m, 1) X];
+a2 = sigmoid(Theta1 * X'); % a2: #neuron-2nd x m
+a2 = [ones(1, m); a2] %a2: (#neuron-2nd + 1) x m
+a3 = sigmoid(Theta2 * a2); % a3: #neuron-3rd x m
 
-
-
-
-
-
+[maxVal, index] = max(a3);
+p = index';
 
 
 % =========================================================================
