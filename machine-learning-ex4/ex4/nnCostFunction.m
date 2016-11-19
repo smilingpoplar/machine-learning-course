@@ -72,14 +72,12 @@ Y = zeros(m, num_labels);
 for k = 1:num_labels
   Y(:,k) = (y == k);
 endfor
-
 J = sum(sum(Y .* log(h) + (1 - Y) .* log(1 - h))) / -m;
 
-
-
-
-
-
+Theta1_reg = Theta1(:, 2:end);
+Theta2_reg = Theta2(:, 2:end);
+reg = (sum(sum(Theta1_reg .* Theta1_reg)) + sum(sum(Theta2_reg .* Theta2_reg))) * lambda / (2 * m);
+J += reg;
 
 
 % -------------------------------------------------------------
