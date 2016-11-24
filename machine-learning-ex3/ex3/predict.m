@@ -23,13 +23,10 @@ p = zeros(size(X, 1), 1);
 
 % Theta1: #neuron-2nd x (#neuron-1st + 1)
 % Theta2: #neuron-3rd x (#neuron-2nd + 1)
-X = [ones(m, 1) X];
-a2 = sigmoid(Theta1 * X'); % a2: #neuron-2nd x m
-a2 = [ones(1, m); a2] %a2: (#neuron-2nd + 1) x m
-a3 = sigmoid(Theta2 * a2); % a3: #neuron-3rd x m
+a2 = sigmoid([ones(m, 1) X] * Theta1');  % a2: m x #neuron-2nd
+a3 = sigmoid([ones(m, 1) a2] * Theta2'); % a3: m x #neuron-3rd
 
-[maxVal, index] = max(a3);
-p = index';
+[dummy, p] = max(a3, [], 2);
 
 
 % =========================================================================
