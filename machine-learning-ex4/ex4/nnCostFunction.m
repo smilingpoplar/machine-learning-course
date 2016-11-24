@@ -77,8 +77,7 @@ J = sum(sum(Y .* log(h) + (1 - Y) .* log(1 - h))) / -m;
 
 Theta1_reg = Theta1(:, 2:end);
 Theta2_reg = Theta2(:, 2:end);
-reg = (sum(sum(Theta1_reg .* Theta1_reg)) + sum(sum(Theta2_reg .* Theta2_reg))) * lambda / (2 * m);
-J += reg;
+J += (sum(sum(Theta1_reg .* Theta1_reg)) + sum(sum(Theta2_reg .* Theta2_reg))) * lambda / (2 * m);
 
 
 % -------------------------------------------------------------
@@ -92,8 +91,11 @@ for i = 1:m
   Delta2 += delta3 * a2(i,:); % output_size x (hidden_size + 1)
   Delta1 += delta2 * a1(i,:); % hidden_size x (input_size + 1)
 endfor
-Theta1_grad = Delta1 / m;
 Theta2_grad = Delta2 / m;
+Theta1_grad = Delta1 / m;
+
+Theta2_grad += [zeros(size(Theta2, 1), 1) Theta2_reg] * lambda / m;
+Theta1_grad += [zeros(size(Theta1, 1), 1) Theta1_reg] * lambda / m;
 
 
 % =========================================================================
