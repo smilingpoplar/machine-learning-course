@@ -23,8 +23,7 @@ h = X * theta;
 err = h - y;
 thetaReg = theta(2:end);
 J = err' * err / (2 * m) + thetaReg' * thetaReg * lambda / (2 * m);
-
-
+grad = X' * err / m + [0; thetaReg] * lambda / m;
 
 
 
