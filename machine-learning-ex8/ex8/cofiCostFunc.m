@@ -42,6 +42,22 @@ Theta_grad = zeros(size(Theta));
 
 J = sum(sum(((X * Theta' - Y) .* R) .^ 2)) / 2;
 
+for i = 1:num_movies
+  idx = find(R(i, :) == 1); % users that have rated movie i
+  X_tmp = X(i, :); % 1 x n
+  Theta_tmp = Theta(idx, :); % #idx x n
+  Y_tmp = Y(i, idx); % 1 x #idx
+  X_grad(i, :) = (X_tmp * Theta_tmp' - Y_tmp) * Theta_tmp;
+end
+
+for j = 1:num_users
+  idx = find(R(:, j) == 1); % movies that have been rated by user j
+  X_tmp = X(idx, :); % #idx x n
+  Theta_tmp = Theta(j, :); % 1 x n
+  Y_tmp = Y(idx, j); % #idx x 1
+  Theta_grad(j, :) = (X_tmp * Theta_tmp' - Y_tmp)' * X_tmp;
+end
+
 
 % =============================================================
 
