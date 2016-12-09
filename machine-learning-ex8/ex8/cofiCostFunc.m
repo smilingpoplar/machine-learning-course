@@ -41,6 +41,8 @@ Theta_grad = zeros(size(Theta));
 %
 
 J = sum(sum(((X * Theta' - Y) .* R) .^ 2)) / 2;
+J += sum(sum(Theta .^ 2)) * lambda / 2;
+J += sum(sum(X .^ 2)) * lambda / 2;
 
 for i = 1:num_movies
   idx = find(R(i, :) == 1); % users that have rated movie i
